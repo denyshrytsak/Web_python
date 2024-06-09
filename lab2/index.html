@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.1">
+    <title>Ukraine</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 300px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="cgi-bin/process_form.py" method="post">
+            <h1>Hrytsak Denys</h1>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"><br>
+
+            <label>Gender:</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label><br>
+
+            <label>Favorite game:</label>
+            <input type="checkbox" id="Dota 2" name="game" value="Dota 2">
+            <label for="rock">Dota 2</label>
+            <input type="checkbox" id="DS 2" name="game" value="DS 2">
+            <label for="pop">DS 2</label>
+            <input type="checkbox" id="World of Tanks" name="game" value="World of Tanks">
+            <label for="World of Tanks">World of Tanks</label><br>
+
+            <label for="kind">Favorite style of games:</label>
+            <select id="kind" name="kind">
+                <option value="MMO">MMO</option>
+                <option value="Shooter">Shooter</option>
+                <option value="Sport">Sport</option>
+                <option value="WWE">WWE</option>
+            </select><br>
+
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+</html>
