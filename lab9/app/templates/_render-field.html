@@ -1,0 +1,19 @@
+{% macro render_field(field) %}
+  
+  {% if field.type in ["StringField", "PasswordField"] %}
+      {{ field.label(class="form-label") }}
+  {% elif field.type == "BooleanField" %}
+      {{ field.label(class="form-check-label") }}
+  {% endif %}
+
+  {{ field(**kwargs)| safe }}
+ 
+  {% if field.errors %}
+    <ul class=errors>
+    {% for error in field.errors %}
+      <li class="text-danger">{{ error }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+
+{% endmacro %}

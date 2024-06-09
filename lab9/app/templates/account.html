@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% from "_render-field.html" import render_field %}
+{% block title %}Account{% endblock %}
+{% block content %}
+<div class="container mt-5 mb-5">
+  <div class="row">
+      <div class="col-md-3 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <img class="rounded-circle mt-5" src="{{url_for('static', filename='profile_pics/'+current_user.image_file) }}" height="150" width="150px">
+            <span class="font-weight-bold">{{current_user.username}}</span>
+            <span class="text-black-50">{{current_user.email}}</span>
+            <span class="text-info mt-3"> Last seen on: <br/> {{current_user.last_seen.strftime('%Y-%m-%d %H:%M:%S')}}</span>
+          </div>
+      </div>
+      <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h4 class="text-right">Profile Settings</h4>
+              </div>
+              <form action="{{url_for('update_user')}}" method="POST" novalidate enctype="multipart/form-data">
+                  {{ info_form.csrf_token }}
+                  <div class="form-group">
+                      {{ render_field(info_form.username, class="form-control", value=current_user.username) }}
+                  </div>
+                  <div class="form-group">
+                      {{ render_field(info_form.email, class="form-control", value=current_user.email) }}
+                  </div>
+                  <div class="form-group">
+                      {{ render_field(info_form.about_me, current_user.about_me, class="form-control") }}
+                  </div>
+                  <div class="form-group">
+                      {{ render_field(info_form.picture, class="form-control") }}
+                  </div>
+                  {{ render_field(info_form.submit, class="btn btn-outline-primary", style="margin-top: 25px; ") }}
+               </form>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Change password</h4>
+            </div>
+            <form action="{{url_for('change_password')}}" method="POST" novalidate>
+              {{ password_form.csrf_token }}
+              <div class="form-group">
+                {{ render_field(password_form.old_password, class="form-control") }}
+              </div>
+              <div class="form-group">
+                {{ render_field(password_form.new_password, class="form-control") }}
+              </div>
+              <div class="form-group">
+                {{ render_field(password_form.confirm_password, class="form-control") }}
+              </div>
+              {{ render_field(password_form.submit, class="btn btn-outline-primary", style="margin-top: 25px") }}
+            </form>
+          </div>
+      </div>
+  </div>
+</div>
+{% endblock %}
