@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1 class="my-4">About Me</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <img src="{{ url_for('static', filename='img/profile.jpg') }}" class="img-fluid rounded-circle" alt="Profile Image" width=100>
+        </div>
+        <div class="col-md-8">
+            <p>Hello! I'm Denys, a passionate developer with experience in web development and design.</p>
+            <p>Add more details about your background, education, and experience here.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

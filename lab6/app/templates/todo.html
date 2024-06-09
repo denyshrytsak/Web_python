@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% from "_render-field.html" import render_field %}
+{% block title %}Todo{% endblock %}
+{% block content %}
+<div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col col-lg-9 col-xl-7">
+            <div class="card rounded-3">
+                <div class="card-body p-4">
+
+                    <h4 class="text-center my-3 pb-3">Python Flask Simple To Do - SQLAlchemy</h4>
+                    <form class="row" action="{{url_for('add_todo')}}" method="post" style="align-items: flex-end;">
+                        {{ form.csrf_token }}
+                        <div class="col-4">
+                            <div class="form-outline">
+                                {{ render_field(form.title, class="form-control") }}
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-outline">
+                                {{ render_field(form.due_date, class="form-control") }}
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            {{ render_field(form.submit, class="btn btn-primary") }}
+                        </div>
+                    </form>
+
+                    <table class="table mb-4">
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Todo item</th>
+                                <th scope="col">Due date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for todo in todo_list %}
+                            <tr>
+                                <th scope="row">{{todo.id }}</th>
+                                <td>{{ todo.title }}</td>
+                                <td>
+                                    {% if todo.due_date %}
+                                    {{ todo.due_date }}
+                                    {% else %}
+                                    -
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if todo.complete == False %}
+                                    <div class="alert alert-secondary" role="alert">In progress</div>
+                                    {% else %}
+                                    <div class="alert alert-success" role="alert">Completed</div>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <a class="btn btn-success" href="{{url_for('update_todo', id=todo.id)}}">Update</a>
+                                    <a class="btn btn-danger ms-1" href="{{url_for('delete_todo', id=todo.id)}}">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

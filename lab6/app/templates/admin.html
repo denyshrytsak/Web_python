@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% from "_render-field.html" import render_field %}
+{% block title %}Admin{% endblock %}
+{% block content %}
+    <div class="row align-items-center justify-content-between" style="margin-top: 100px;">
+        <h1 class="col-auto">Hello, {{username}}!</h1>
+        <div class="col-auto row">
+            <form class="col-auto" method="POST" action="{{url_for('logout')}}" >
+                <input type="submit" class="btn btn-danger" value="Log out"/>
+            </form>
+            <button type="button" class="col-auto btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Change password
+            </button>
+        </div>
+    </div>
+    <div style="margin-top: 80px;">
+            <div class="row align-items-center justify-content-end">
+                <form  method="POST" action="{{url_for('add_cookie')}}" class="col-auto align-items-center row">
+                    <div class="col-auto">
+                      <input name="key" type="text" class="form-control" id="key" placeholder="Key">
+                    </div>
+                    <div class="col-auto">
+                      <input name="value" type="text" class="form-control" id="value" placeholder="Value">
+                    </div>
+                    <div class="col-auto">
+                        <input name="date" type="datetime-local">
+                      </div>
+                    <div class="col-auto">
+                      <button type="submit" class="btn btn-dark">
+                           Add
+                      </button>
+                    </div>
+
+                  </form>
+                  <form class="col-auto" method="POST" action="{{url_for('delete_cookie')}}">
+                    <button type="submit" class="btn btn-danger">
+                        Delete All
+                   </button>
+                </form>
+            </div>
+    </div>
+    <table class="table" style="word-break: break-word;">
+        <thead>
+          <tr>
+            <th scope="col">Key</th>
+            <th scope="col">Value</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for key, value in cookies.items() %}
+            <tr>
+                <td>{{key}}</td>
+                <td>{{value}}</td>
+                <td> <form  method="POST" action="{{url_for('delete_cookie', key=key)}}">
+                    <button type="submit" class="btn btn-outline-danger">
+                        Delete
+                    </button>
+                </form></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Change password form</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form action="{{url_for('change_password')}}" method="POST">
+            {{ form.csrf_token }}
+            <div class="form-group">
+              {{ render_field(form.old_password, class="form-control") }}
+            </div>
+            <div class="form-group">
+              {{ render_field(form.new_password, class="form-control") }}
+            </div>
+            {{ render_field(form.submit, class="btn btn-primary", style="margin-top: 25px; width: 100%;") }}
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% from "_render-field.html" import render_field %}
+{% block title %}Login{% endblock %}
+{% block content %}
+    <form method="POST" style="max-width: 500px; margin: 150px auto 0;" novalidate>
+        {{ form.csrf_token }}
+        <h1 class="text-center">Login</h1>
+        <div class="form-group">
+            {{ render_field(form.name, class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ render_field(form.password, class="form-control") }}
+        </div>
+        <div class="form-group mt-3">
+            <div class="form-check">
+                {{ render_field(form.remember, class="form-check-input") }}
+            </div>
+        </div>
+        {{ render_field(form.submit, class="btn btn-primary", style="margin-top: 25px; width: 100%;") }}
+    </form>
+{% endblock %}
