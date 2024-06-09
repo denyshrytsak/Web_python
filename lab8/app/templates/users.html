@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Users{% endblock %}
+{% block content %}
+    <p class="mt-5">Total: {{users|length}}</p>
+    <section class="list ">
+        {% for user in users %}
+            <div class="card mt-2" style="width: 80%; margin:0 auto">
+                <div class="card-body" >
+                    <div style="display: flex; justify-content: space-between;">
+                        <h4 class="card-title">{{user.username}}</h4>
+                        <div>id: {{user.id}}</div>
+                    </div>
+                    <h6 class="card-subtitle mb-2 text-muted">{{user.email}}</h6>
+                </div>
+            </div>
+            {% else %}
+            <h6 class="text-center"><em >No users found</em></h6>
+            
+        {% endfor %}
+    </section>
+
+{% endblock %}

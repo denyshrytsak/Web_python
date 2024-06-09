@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron text-center bg-light">
+    <h1 class="display-4">Welcome to My Portfolio</h1>
+    <p class="lead">This is the home page of my portfolio website.</p>
+    <hr class="my-4">
+    <p>Explore more about me and my work.</p>
+    <a class="btn btn-primary btn-lg" href="{{ url_for('about') }}" role="button">Learn more</a>
+</div>
+{% endblock %}
